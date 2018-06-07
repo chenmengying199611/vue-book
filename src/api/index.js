@@ -11,7 +11,7 @@ axios.interceptors.response.use((res)=>{
 
 //获取轮播图数据
 // 获取轮播图数据 , 返回的是一个promise对象
-export let getSliders = () =>{
+export let getSliders =()=>{
     return axios.get('/sliders')
   };
 

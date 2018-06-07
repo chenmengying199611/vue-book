@@ -6,6 +6,8 @@ import router from './router'
 
 // 导入轮播图插件
 import VueAwesomeSwiper from 'vue-awesome-swiper';
+// 使用轮播图插件
+Vue.use(VueAwesomeSwiper);
 import 'swiper/dist/css/swiper.css';
 
 // 导入懒加载插件
@@ -19,16 +21,24 @@ Vue.use(VueLazyLoad, {
   attempt: 1
 })
 
-// 使用轮播图插件
-Vue.use(VueAwesomeSwiper);
-
-
 Vue.config.productionTip = false
+
+//在进入路由之前  每一次都会执行此方法
+//路径地址为localhost:8080/list时   默认是从/到list中去  所以to指的就是list
+router.beforeEach(function(to,from,next){
+  //console.log(to);
+  document.title=to.meta.title;
+  next();
+})
+
+//购物车
+import store from './store'
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  store
 })

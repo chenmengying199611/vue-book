@@ -10,7 +10,9 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
+  mode:'history',
   routes: [
+   
     // 前台页面的渲染主要依靠的是路由的变化
     //发送请求获取数据 和后台逻辑的主要是接口
     //即现在前台页面的跳转也依靠前端路由来实现
@@ -19,24 +21,28 @@ export default new Router({
     {
       path:'/home',
       component:()=>import('../components/Home.vue'),
-      meta:{keepAlive:true}
+      meta:{keepAlive:true,title:'首页'}
     },
     {
       path:'/collect',
-      component:()=>import('../components/Collect.vue')
+      component:()=>import('../components/Car.vue'),
+      meta:{title:'购物车'}
     },
     {
       path:'/add',
-      component:()=>import('../components/Add.vue')
+      component:()=>import('../components/Add.vue'),
+      meta:{title:'添加'}
     },
     {
       path:'/list',
-      component:()=>import('../components/List.vue')
+      component:()=>import('../components/List.vue'),
+      meta:{title:'列表'}
     },
     {
       path:'/detail/:bid',
       component:()=>import('../components/Detail.vue'),
-      name:'detail'
+      name:'detail',
+      meta:{title:'详情'}
     }
   ]
 })

@@ -8,7 +8,7 @@
       <div class="container">
         <h3>热门图书</h3>
         <ul>
-          <li v-for="hot in hotBooks">
+          <li v-for="(hot,index) in hotBooks" :key="index">
             <img :src="hot.bookCover">
             <b>{{hot.bookName}}</b>
           </li>

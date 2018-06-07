@@ -10,7 +10,7 @@
     </router-link>
     <router-link to="/collect">
         <i class="iconfont icon-shoucang"></i>
-        <span>收藏</span>
+        <span>购物车<i>{{count}}</i></span>
     </router-link>
     <router-link to="/add">
         <i class="iconfont icon-tianjia"></i>
@@ -20,8 +20,18 @@
 </template>
 
 <script>
+
+import {mapState,mapGetters} from 'vuex';
+
 export default {
-  
+    data(){
+        return {
+
+        }
+    },
+    computed:{
+        ...mapGetters(['count'])
+    }
 }
 </script>
 <!-- 
@@ -51,6 +61,17 @@ export default {
             align-items:center;
             justify-content:center;
             color:#afdeee;
+            span {
+                position: relative;
+                i {
+                    position: absolute;
+                    top: -25px;
+                    left: 35px;
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: red;
+                }
+            }
         }
         a.router-link-exact-active {
             color:yellowgreen;

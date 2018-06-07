@@ -9,7 +9,11 @@
             <h4>{{book.bookName}}</h4>
             <p>{{book.bookInfo}}</p>
             <b>{{book.bookPrice}}</b>
-            <button @click.stop="remove(book.bookId)">删除</button>
+            <div class="btn-list">
+              <button @click.stop="remove(book.bookId)">删除</button>
+              <button @click.stop="addCart(book)">添加进购物车</button>
+            </div>
+            
           </div>
         </router-link>
       </ul>
@@ -22,7 +26,7 @@
 
 import MHeader from '../base/MHeader.vue';
 import Tab from '../base/Tab.vue';
-
+import * as Types from '../store/mutations-types.js'
 //导入的是getBooks接口
 import  {pagination,removeBook}   from '../api';
 
@@ -41,6 +45,11 @@ export default {
     this.getData();//这里表示页面加载的时候就触发getData()函数
   },
   methods:{
+
+     addCart(book){
+          this.$store.commit(Types.ADD_CART,book)
+    },
+
     //滑动的时候触发这个函数
     loadMore(){
       //解构赋值
@@ -48,7 +57,6 @@ export default {
       
       //进来时触发scroll事件  可能触发n次  先进来开一个定时器  下次触发的时候
       //将上一次触发的定时器清掉  最后只剩一个
-
       clearTimeout(this.timer);
       this.timer=setTimeout(()=>{
         let {scrollTop,scrollHeight,clientHeight}=this.$refs.scroll;
@@ -97,6 +105,7 @@ export default {
       //2、直接操作前台数据  从前台数据里面删除  因为前台页面渲染的时候 也是用数据渲染的
       this.books=this.books.filter(item=>item.bookId!==id)
     }
+   
   },
   computed:{},
   components:{
@@ -114,7 +123,7 @@ export default {
   }
   .content ul li {
     display:flex;
-    padding:10px 0;
+    padding:10px 30px 10px 10px;
     border-bottom:1px solid #f1f1f1;
   }
   .content ul li img {
@@ -134,8 +143,7 @@ export default {
   }
   .content button {
     display:block;
-    width:60px;
-    height:25px;
+    padding: 8px;
     background-color:orange;
     color:#fff;
     border:none;
@@ -151,5 +159,10 @@ export default {
     line-height:30px;
     text-align:center;
     color:#fff;
+  }
+  .btn-list {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
   }
 </style>
